@@ -1,0 +1,350 @@
+/* =========================================
+   VARIABLES GLOBALES Y TOKENS DE DISEÑO
+   ========================================= */
+:root {
+  /* Paleta vibrante y moderna (Modo Oscuro como base) */
+  --bg-color: #0f172a;          /* Slate 900 */
+  --surface-color: rgba(30, 41, 59, 0.7); /* Slate 800 transparente */
+  --surface-border: rgba(255, 255, 255, 0.1);
+  --text-primary: #f8fafc;      /* Slate 50 */
+  --text-secondary: #94a3b8;    /* Slate 400 */
+  
+  --primary-color: #8b5cf6;     /* Violet 500 */
+  --primary-hover: #7c3aed;     /* Violet 600 */
+  --accent-color: #ec4899;      /* Pink 500 */
+  
+  --success-color: #10b981;     /* Emerald 500 */
+  --error-color: #ef4444;       /* Red 500 */
+  --danger-hover: #dc2626;      /* Red 600 */
+
+  /* Sombras y transiciones */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Radios de borde */
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+/* =========================================
+   RESETEO BASE
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   DECORACIONES DE FONDO (Glassmorphism)
+   ========================================= */
+.decoracion-fondo {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.circulo-1 {
+  width: 300px;
+  height: 300px;
+  background-color: var(--primary-color);
+  top: -50px;
+  left: -50px;
+}
+
+.circulo-2 {
+  width: 400px;
+  height: 400px;
+  background-color: var(--accent-color);
+  bottom: -100px;
+  right: -100px;
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+   ========================================= */
+.contenedor-principal {
+  background: var(--surface-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* =========================================
+   ENCABEZADO
+   ========================================= */
+.encabezado {
+  text-align: center;
+}
+
+.encabezado h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+}
+
+.subtitulo {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* =========================================
+   SECCIÓN DE ENTRADA (Input y Botón)
+   ========================================= */
+.seccion-entrada {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grupo-entrada {
+  display: flex;
+  gap: 12px;
+  position: relative;
+}
+
+.input-tarea {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition-normal);
+  outline: none;
+}
+
+.input-tarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.input-tarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-glow);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.input-tarea.error-borde {
+  border-color: var(--error-color);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+  animation: shake 0.4s ease-in-out;
+}
+
+.boton-agregar {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.boton-agregar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.6);
+  filter: brightness(1.1);
+}
+
+.boton-agregar:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   MENSAJES Y ESTADOS
+   ========================================= */
+.mensaje-error {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mensaje-error.oculto {
+  opacity: 0;
+  transform: translateY(-5px);
+  pointer-events: none;
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+}
+
+/* =========================================
+   LISTA DE TAREAS
+   ========================================= */
+.seccion-tareas {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.estadisticas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 12px;
+}
+
+.contador-pendientes {
+  background: var(--primary-color);
+  color: white;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  margin-left: 6px;
+}
+
+.lista-tareas {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Scrollbar personalizada */
+.lista-tareas::-webkit-scrollbar {
+  width: 6px;
+}
+.lista-tareas::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-full);
+}
+.lista-tareas::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+}
+.lista-tareas::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* ITEM TAREA INDIVIDUAL */
+.tarea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  animation: slideIn 0.3s ease forwards;
+}
+
+.tarea:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(4px);
+}
+
+/* Estado: Completada */
+.tarea.completada {
+  opacity: 0.6;
+  background: rgba(16, 185, 129, 0.05);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.tarea.completada .texto-tarea {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+/* Contenido de la tarea */
+.texto-tarea {
+  flex: 1;
+  word-break: break-word;
+  transition: var(--transition-fast);
+  line-height: 1.4;
+}
+
+/* Botón Eliminar de cada tarea */
+.boton-eliminar {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-full);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-fast);
+}
+
+.boton-eliminar svg {
+  width: 18px;
+  height: 18px;
+  pointer-events: none; /* Asegura que el evento click ocurra en el botón */
+}
+
+.boton-eliminar:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--error-color);
+  transform: scale(1.1);
+}
+
+/* =========================================
+   ANIMACIONES (Micro-interacciones)
+   ========================================= */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
