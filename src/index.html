@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App | Laboratorio DOM</title>
+  
+  <!-- SEO Best Practices aplicadas -->
+  <meta name="description" content="Aplicación de lista de tareas moderna, utilizando Vanilla JavaScript y manipulación del DOM.">
+  
+  <!-- Font moderna (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  
+  <!-- Fondo y elementos decorativos (Glassmorphism & Gradients) -->
+  <div class="decoracion-fondo circulo-1"></div>
+  <div class="decoracion-fondo circulo-2"></div>
+  
+  <main class="contenedor-principal">
+    <header class="encabezado">
+      <h1>Mis Tareas</h1>
+      <p class="subtitulo">Laboratorio de manipulación del DOM</p>
+    </header>
+
+    <section class="seccion-entrada">
+      <div class="grupo-entrada">
+        <input 
+          type="text" 
+          class="input-tarea" 
+          id="input-nueva-tarea"
+          placeholder="¿Qué necesitas hacer hoy?"
+          autocomplete="off">
+        <button class="boton-agregar" id="btn-agregar" aria-label="Agregar tarea">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+      <p class="mensaje-error oculto" id="msj-error">¡Por favor, ingresa una tarea válida!</p>
+    </section>
+
+    <section class="seccion-tareas">
+      <div class="estadisticas">
+        <p>Tareas pendientes: <strong class="contador-pendientes" id="contador-tareas">0</strong></p>
+      </div>
+      <ul class="lista-tareas" id="lista-contenedor">
+        <!-- Las tareas se insertarán aquí dinámicamente desde JS -->
+      </ul>
+    </section>
+  </main>
+
+  <!-- JS -->
+  <script src="./index.js"></script>
+</body>
+</html>
